@@ -17,14 +17,19 @@
   .header {
     background: #3A5068;
     color: #EAF4F8;
-    padding: 14px 16px 12px;
+    padding: 14px 16px 0;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
     flex-shrink: 0;
     position: sticky;
     top: 0;
     z-index: 10;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
   }
   .header-back {
     width: 30px; height: 30px;
@@ -38,6 +43,37 @@
   .header-title { font-size: 15px; font-weight: 600; }
   .header-sub { font-size: 11px; opacity: 0.7; margin-top: 1px; }
 
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: rgba(234,244,248,0.6);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 0 8px;
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .tab-btn.active {
+    color: #EAF4F8;
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 16px; right: 16px;
+    height: 2px;
+    background: #7bbfcc;
+    border-radius: 2px 2px 0 0;
+  }
+
+  /* ── ACCORDION ── */
   .accordion { margin: 0 16px 0; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
   .accordion-header {
     background: white;
@@ -66,6 +102,7 @@
   .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: #f8fbfc; }
   .accordion-body.open { max-height: 2400px; }
 
+  /* ── GUIDE PAGE ── */
   .guia-page { padding: 0 0 16px; background: #f0f4f7; flex: 1; overflow-y: auto; }
   .guia-section-title {
     font-size: 11px; font-weight: 700; color: #7bbfcc;
@@ -104,470 +141,550 @@
   .badge-free-cond { background: #EEF0FA; color: #3A5068; }
   .subsection { padding: 8px 14px 4px; background: #fafcfe; border-bottom: 1px solid #eef2f5; }
   .subsection-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ── TAB PANELS ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SERVICIOS PANEL ── */
+  .servicios-panel {
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .servicios-intro {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+  .servicios-intro-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+  .servicios-intro-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #3A5068;
+    margin-bottom: 4px;
+  }
+  .servicios-intro-desc {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.5;
+  }
+  .servicios-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #3A5068;
+    color: #EAF4F8;
+    border: none;
+    border-radius: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(58,80,104,0.25);
+    transition: background 0.2s, box-shadow 0.2s;
+    gap: 14px;
+  }
+  .servicios-cta-btn:active {
+    background: #2d3f52;
+    box-shadow: 0 2px 8px rgba(58,80,104,0.2);
+  }
+  .servicios-cta-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .servicios-cta-icon {
+    width: 46px; height: 46px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .servicios-cta-text-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #EAF4F8;
+  }
+  .servicios-cta-text-sub {
+    font-size: 12px;
+    color: rgba(234,244,248,0.65);
+    margin-top: 2px;
+  }
+  .servicios-cta-arrow {
+    font-size: 22px;
+    color: rgba(234,244,248,0.5);
+    flex-shrink: 0;
+  }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .servicios-pill {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .servicios-pill-icon { font-size: 24px; }
+  .servicios-pill-label { font-size: 12px; font-weight: 600; color: #3A5068; }
 </style>
 </head>
 <body>
 
 <div id="s-guia" style="display:flex; flex-direction:column; min-height:100vh;">
   <div class="header">
-    <button class="header-back" onclick="history.back()">‹</button>
-    <div>
-      <div class="header-title">Información de interés</div>
-      <div class="header-sub">Valladolid</div>
+    <div class="header-top">
+      <button class="header-back" onclick="history.back()">‹</button>
+      <div>
+        <div class="header-title">Información de interés</div>
+        <div class="header-sub">Valladolid</div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('servicios', this)">🛎️ Servicios</button>
+      <button class="tab-btn" onclick="switchTab('turismo', this)">🗺️ Turismo</button>
     </div>
   </div>
 
-  <div class="guia-page">
+  <!-- ════════════════════════════════════
+       TAB: TURISMO
+  ════════════════════════════════════ -->
+  <div id="tab-turismo" class="tab-panel">
+    <div class="guia-page">
 
-    <!-- Enlace web oficial -->
-    <a href="https://www.info.valladolid.es" target="_blank" style="display:flex;align-items:center;gap:10px;margin:14px 16px 2px;background:white;border-radius:14px;padding:12px 14px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.07);border:1px solid #e0eaf2;">
-      <div style="width:36px;height:36px;background:#dff0f5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🌐</div>
-      <div style="flex:1;">
-        <div style="font-size:13px;font-weight:600;color:#3A5068;">Portal de Turismo de Valladolid</div>
-        <div style="font-size:11px;color:#7bbfcc;">info.valladolid.es</div>
-      </div>
-      <span style="color:#ccc;font-size:18px;">›</span>
-    </a>
+      <!-- Enlace web oficial -->
+      <a href="https://www.info.valladolid.es" target="_blank" style="display:flex;align-items:center;gap:10px;margin:14px 16px 2px;background:white;border-radius:14px;padding:12px 14px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.07);border:1px solid #e0eaf2;">
+        <div style="width:36px;height:36px;background:#dff0f5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🌐</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:600;color:#3A5068;">Portal de Turismo de Valladolid</div>
+          <div style="font-size:11px;color:#7bbfcc;">info.valladolid.es</div>
+        </div>
+        <span style="color:#ccc;font-size:18px;">›</span>
+      </a>
 
-    <div class="guia-section-title" style="padding-top:14px">Toca una categoría para expandir</div>
+      <div class="guia-section-title" style="padding-top:14px">Toca una categoría para expandir</div>
 
-    <!-- ── MONUMENTOS ── -->
-    <div class="accordion" style="margin-bottom:12px">
-      <div class="accordion-header" onclick="toggleAcc(this)">
-        <div class="accordion-cat-icon" style="background:#EEEDFE">🏛️</div>
-        <span class="accordion-title">Monumentos y espacios</span>
-        <span class="accordion-count">8</span>
-        <span class="accordion-chevron">›</span>
-      </div>
-      <div class="accordion-body">
-        <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
+      <!-- ── MONUMENTOS ── -->
+      <div class="accordion" style="margin-bottom:12px">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-cat-icon" style="background:#EEEDFE">🏛️</div>
+          <span class="accordion-title">Monumentos y espacios</span>
+          <span class="accordion-count">8</span>
+          <span class="accordion-chevron">›</span>
+        </div>
+        <div class="accordion-body">
+          <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Plaza+Mayor+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">🏟️</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Plaza Mayor</div>
-              <div class="guia-item-desc">Una de las más antiguas de España · Modelo para la Plaza Mayor de Madrid · Corazón de la vida social vallisoletana</div>
-              <span class="schedule-badge badge-free">Acceso libre</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
-
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Iglesia+San+Pablo+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">⛪</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Iglesia de San Pablo</div>
-              <div class="guia-item-desc">Fachada plateresca del s. XV · Una de las más bellas de Castilla · Junto al Palacio de Pimentel, donde nació Felipe II</div>
-              <span class="schedule-badge badge-free">Entrada gratuita</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
-
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Iglesia+Santa+María+Antigua+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">🗼</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Iglesia de Santa María la Antigua</div>
-              <div class="guia-item-desc">Símbolo de la ciudad · Torre románico-gótica del s. XIV · Una de las imágenes más icónicas de Valladolid</div>
-              <span class="schedule-badge badge-free">Visita exterior libre</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
-
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Catedral+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">⛩️</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Catedral de Valladolid</div>
-              <div class="guia-item-desc">Diseñada por Juan de Herrera en el s. XVI · Acceso a la torre con vistas panorámicas · Museo catedralicio adjunto</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00 – 13:30 · 16:00 – 19:00</span></div>
-                <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">10:00 – 14:00</span></div>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Plaza+Mayor+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">🏟️</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Plaza Mayor</div>
+                <div class="guia-item-desc">Una de las más antiguas de España · Modelo para la Plaza Mayor de Madrid · Corazón de la vida social vallisoletana</div>
+                <span class="schedule-badge badge-free">Acceso libre</span>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Parque+Campo+Grande+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#E8F5E9;margin-top:2px">🦚</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Parque Campo Grande</div>
-              <div class="guia-item-desc">El gran pulmón verde de la ciudad · Estanque, cascada y pavos reales · Junto a la Plaza de Zorrilla</div>
-              <span class="schedule-badge badge-free">Acceso libre</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
-
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Academia+de+Caballería+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#E6F1FB;margin-top:2px">🎖️</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Academia de Caballería</div>
-              <div class="guia-item-desc">Edificio neoclásico imponente · Museo interior con armamento, uniformes y una máquina Enigma de la II Guerra Mundial</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00 – 14:00 · 16:00 – 19:30</span></div>
-                <div class="schedule-row"><span class="schedule-days">Dom y fest.</span><span class="schedule-hours">10:00 – 14:00</span></div>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Iglesia+San+Pablo+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">⛪</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Iglesia de San Pablo</div>
+                <div class="guia-item-desc">Fachada plateresca del s. XV · Una de las más bellas de Castilla · Junto al Palacio de Pimentel, donde nació Felipe II</div>
+                <span class="schedule-badge badge-free">Entrada gratuita</span>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Palacio+Pimentel+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">👑</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Palacio de Pimentel</div>
-              <div class="guia-item-desc">Lugar de nacimiento de Felipe II en 1527 · Sede de la Diputación · Zaguán con azulejos de Talavera · Visitable en horario laboral</div>
-              <span class="schedule-badge badge-free">Entrada gratuita</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Iglesia+Santa+María+Antigua+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">🗼</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Iglesia de Santa María la Antigua</div>
+                <div class="guia-item-desc">Símbolo de la ciudad · Torre románico-gótica del s. XIV · Una de las imágenes más icónicas de Valladolid</div>
+                <span class="schedule-badge badge-free">Visita exterior libre</span>
+              </div>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Casa+del+Rio+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#E3F2FD;margin-top:2px">🐟</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Casa del Río (Acuario fluvial)</div>
-              <div class="guia-item-desc">Primer acuario fluvial de España · Flora y fauna del Pisuerga · Bajo la pasarela peatonal (C/ Juan Altisent, 2)</div>
-              <span class="schedule-badge badge-paid">Entrada de pago</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Catedral+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">⛩️</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Catedral de Valladolid</div>
+                <div class="guia-item-desc">Diseñada por Juan de Herrera en el s. XVI · Acceso a la torre con vistas panorámicas · Museo catedralicio adjunto</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00 – 13:30 · 16:00 – 19:00</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">10:00 – 14:00</span></div>
+                </div>
+              </div>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Parque+Campo+Grande+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#E8F5E9;margin-top:2px">🦚</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Parque Campo Grande</div>
+                <div class="guia-item-desc">El gran pulmón verde de la ciudad · Estanque, cascada y pavos reales · Junto a la Plaza de Zorrilla</div>
+                <span class="schedule-badge badge-free">Acceso libre</span>
+              </div>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
+
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Academia+de+Caballería+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#E6F1FB;margin-top:2px">🎖️</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Academia de Caballería</div>
+                <div class="guia-item-desc">Edificio neoclásico imponente · Museo interior con armamento, uniformes y una máquina Enigma de la II Guerra Mundial</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00 – 14:00 · 16:00 – 19:30</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Dom y fest.</span><span class="schedule-hours">10:00 – 14:00</span></div>
+                </div>
+              </div>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
+
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Palacio+Pimentel+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#EEEDFE;margin-top:2px">👑</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Palacio de Pimentel</div>
+                <div class="guia-item-desc">Lugar de nacimiento de Felipe II en 1527 · Sede de la Diputación · Zaguán con azulejos de Talavera · Visitable en horario laboral</div>
+                <span class="schedule-badge badge-free">Entrada gratuita</span>
+              </div>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
+
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Casa+del+Rio+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#E3F2FD;margin-top:2px">🐟</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Casa del Río (Acuario fluvial)</div>
+                <div class="guia-item-desc">Primer acuario fluvial de España · Flora y fauna del Pisuerga · Bajo la pasarela peatonal (C/ Juan Altisent, 2)</div>
+                <span class="schedule-badge badge-paid">Entrada de pago</span>
+              </div>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
+
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- ── MUSEOS ── -->
-    <div class="accordion" style="margin-bottom:12px">
-      <div class="accordion-header" onclick="toggleAcc(this)">
-        <div class="accordion-cat-icon" style="background:#FFF3E0">🖼️</div>
-        <span class="accordion-title">Museos</span>
-        <span class="accordion-count">6</span>
-        <span class="accordion-chevron">›</span>
-      </div>
-      <div class="accordion-body">
-        <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
+      <!-- ── MUSEOS ── -->
+      <div class="accordion" style="margin-bottom:12px">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-cat-icon" style="background:#FFF3E0">🖼️</div>
+          <span class="accordion-title">Museos</span>
+          <span class="accordion-count">6</span>
+          <span class="accordion-chevron">›</span>
+        </div>
+        <div class="accordion-body">
+          <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
 
-          <a class="guia-item" style="align-items:flex-start" href="https://museosdescultura.mcu.es" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🗿</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Museo Nacional de Escultura</div>
-              <div class="guia-item-desc">El más importante de España en escultura policromada · Gregorio Fernández, Juan de Juni · S. XIII al XVIII · En el Colegio de San Gregorio</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00 – 14:00 · 16:00 – 19:30</span></div>
-                <div class="schedule-row"><span class="schedule-days">Dom y fest.</span><span class="schedule-hours">10:00 – 14:00</span></div>
-                <div class="schedule-note">Tel. 983 250 375 · Gratis dom. mañana y sábado desde 14h (UE)</div>
+            <a class="guia-item" style="align-items:flex-start" href="https://museosdescultura.mcu.es" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🗿</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Museo Nacional de Escultura</div>
+                <div class="guia-item-desc">El más importante de España en escultura policromada · Gregorio Fernández, Juan de Juni · S. XIII al XVIII · En el Colegio de San Gregorio</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00 – 14:00 · 16:00 – 19:30</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Dom y fest.</span><span class="schedule-hours">10:00 – 14:00</span></div>
+                  <div class="schedule-note">Tel. 983 250 375 · Gratis dom. mañana y sábado desde 14h (UE)</div>
+                </div>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://museoph.org" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🎨</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Museo Patio Herreriano</div>
-              <div class="guia-item-desc">Arte contemporáneo español desde 1918 · +1.100 obras · Claustro renacentista del Monasterio de San Benito · C/ Jorge Guillén, 6</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mar – Vie</span><span class="schedule-hours">11:00–14:00 · 17:00–20:00</span></div>
-                <div class="schedule-row"><span class="schedule-days">Sábado</span><span class="schedule-hours">11:00 – 20:00 (ininterrumpido)</span></div>
-                <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">11:00 – 15:00</span></div>
-                <div class="schedule-note">Tel. 983 362 908 · Entrada gratuita</div>
+            <a class="guia-item" style="align-items:flex-start" href="https://museoph.org" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🎨</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Museo Patio Herreriano</div>
+                <div class="guia-item-desc">Arte contemporáneo español desde 1918 · +1.100 obras · Claustro renacentista del Monasterio de San Benito · C/ Jorge Guillén, 6</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mar – Vie</span><span class="schedule-hours">11:00–14:00 · 17:00–20:00</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Sábado</span><span class="schedule-hours">11:00 – 20:00 (ininterrumpido)</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">11:00 – 15:00</span></div>
+                  <div class="schedule-note">Tel. 983 362 908 · Entrada gratuita</div>
+                </div>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Museo+de+la+Ciencia+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🔬</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Museo de la Ciencia</div>
-              <div class="guia-item-desc">Ideal para familias · Exposiciones interactivas · Planetario</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mar – Dom</span><span class="schedule-hours">10:00–14:00 · 17:00–20:30</span></div>
-                <div class="schedule-row"><span class="schedule-days">Lunes</span><span class="schedule-hours" style="color:#C0392B">Cerrado</span></div>
-                <span class="schedule-badge badge-paid">2 € adultos</span>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Museo+de+la+Ciencia+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🔬</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Museo de la Ciencia</div>
+                <div class="guia-item-desc">Ideal para familias · Exposiciones interactivas · Planetario</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mar – Dom</span><span class="schedule-hours">10:00–14:00 · 17:00–20:30</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Lunes</span><span class="schedule-hours" style="color:#C0392B">Cerrado</span></div>
+                  <span class="schedule-badge badge-paid">2 € adultos</span>
+                </div>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Museo+Oriental+Valladolid+Agustinos+Filipinos" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🏮</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Museo Oriental</div>
-              <div class="guia-item-desc">Arte chino y filipino · Real Colegio de Agustinos Filipinos (s. XVIII) · Una colección única en España</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">16:00 – 19:00</span></div>
-                <div class="schedule-note">Tel. 983 306 800</div>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Museo+Oriental+Valladolid+Agustinos+Filipinos" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">🏮</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Museo Oriental</div>
+                <div class="guia-item-desc">Arte chino y filipino · Real Colegio de Agustinos Filipinos (s. XVIII) · Una colección única en España</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">16:00 – 19:00</span></div>
+                  <div class="schedule-note">Tel. 983 306 800</div>
+                </div>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Casa+Cervantes+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">📖</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Casa-Museo de Cervantes</div>
-              <div class="guia-item-desc">La casa donde vivió Miguel de Cervantes · Recreación del hogar del s. XVII · Conjunta con el Museo de Escultura: 5 €</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00–14:00 · 16:00–19:30</span></div>
-                <div class="schedule-row"><span class="schedule-days">Dom y fest.</span><span class="schedule-hours">10:00 – 14:00</span></div>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Casa+Cervantes+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">📖</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Casa-Museo de Cervantes</div>
+                <div class="guia-item-desc">La casa donde vivió Miguel de Cervantes · Recreación del hogar del s. XVII · Conjunta con el Museo de Escultura: 5 €</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mar – Sáb</span><span class="schedule-hours">10:00–14:00 · 16:00–19:30</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Dom y fest.</span><span class="schedule-hours">10:00 – 14:00</span></div>
+                </div>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Casa+Zorrilla+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">✍️</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Casa de Zorrilla</div>
-              <div class="guia-item-desc">Homenaje al poeta José Zorrilla, autor del Don Juan Tenorio · Visita guiada los sábados sin reserva · Palacio del Licenciado Butrón</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Mié – Dom</span><span class="schedule-hours">11:00–14:00 · 17:00–20:00</span></div>
-                <div class="schedule-row"><span class="schedule-days">Martes</span><span class="schedule-hours" style="color:#C0392B">Cerrado</span></div>
-                <div class="schedule-note">casadelibes@jcyl.es</div>
+            <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Casa+Zorrilla+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0;margin-top:2px">✍️</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Casa de Zorrilla</div>
+                <div class="guia-item-desc">Homenaje al poeta José Zorrilla, autor del Don Juan Tenorio · Visita guiada los sábados sin reserva · Palacio del Licenciado Butrón</div>
+                <div class="guia-item-schedule">
+                  <div class="schedule-row"><span class="schedule-days">Mié – Dom</span><span class="schedule-hours">11:00–14:00 · 17:00–20:00</span></div>
+                  <div class="schedule-row"><span class="schedule-days">Martes</span><span class="schedule-hours" style="color:#C0392B">Cerrado</span></div>
+                  <div class="schedule-note">casadelibes@jcyl.es</div>
+                </div>
               </div>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
+              <span class="guia-item-arrow" style="margin-top:2px">›</span>
+            </a>
 
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- ── GASTRONOMÍA ── -->
-    <div class="accordion" style="margin-bottom:12px">
-      <div class="accordion-header" onclick="toggleAcc(this)">
-        <div class="accordion-cat-icon" style="background:#FAECE7">🍽️</div>
-        <span class="accordion-title">Gastronomía</span>
-        <span class="accordion-count">7</span>
-        <span class="accordion-chevron">›</span>
-      </div>
-      <div class="accordion-body">
-        <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
+      <!-- ── GASTRONOMÍA ── -->
+      <div class="accordion" style="margin-bottom:12px">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-cat-icon" style="background:#FAECE7">🍽️</div>
+          <span class="accordion-title">Gastronomía</span>
+          <span class="accordion-count">7</span>
+          <span class="accordion-chevron">›</span>
+        </div>
+        <div class="accordion-body">
+          <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
 
-          <!-- Recomendación general -->
-          <div style="padding:10px 14px 8px;background:#fafcfe;border-bottom:1px solid #eef2f5;">
-            <div style="font-size:11px;color:#3A5068;line-height:1.5;">📍 Las mejores zonas para tapear son el entorno de <strong>San Miguel</strong> y la <strong>Catedral</strong>. El concurso de pinchos de noviembre deja las creaciones en carta todo el año.</div>
+            <div style="padding:10px 14px 8px;background:#fafcfe;border-bottom:1px solid #eef2f5;">
+              <div style="font-size:11px;color:#3A5068;line-height:1.5;">📍 Las mejores zonas para tapear son el entorno de <strong>San Miguel</strong> y la <strong>Catedral</strong>. El concurso de pinchos de noviembre deja las creaciones en carta todo el año.</div>
+            </div>
+
+            <div class="subsection"><span class="subsection-label" style="color:#C0392B;">✦ Alta cocina</span></div>
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#FAECE7">🥇</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Villa Paramesa</div>
+                <div class="guia-item-desc">25 años de tradición · Tapas premiadas en concursos nacionales · Plaza Martí y Monsó · Reserva recomendada</div>
+              </div>
+              <span style="background:#fdf0ee;color:#C0392B;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~40–60 €</span>
+            </div>
+
+            <div class="subsection" style="border-top:1px solid #eef2f5;"><span class="subsection-label" style="color:#E67E22;">◆ Gama media</span></div>
+            <a class="guia-item" href="https://www.google.com/maps/search/Los+Zagales+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0">🥂</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Los Zagales</div>
+                <div class="guia-item-desc">Referente de los vinos y tapas vallisoletanos · Siempre en todos los rankings · Reserva recomendable</div>
+              </div>
+              <span style="background:#fff8ee;color:#E67E22;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~25–40 €</span>
+            </a>
+            <a class="guia-item" href="https://www.google.com/maps/search/Restaurante+Don+Bacalao+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#FFF3E0">🐟</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Don Bacalao</div>
+                <div class="guia-item-desc">Especialista en bacalao y cocina castellana de producto · Muy bien valorado por la crítica</div>
+              </div>
+              <span style="background:#fff8ee;color:#E67E22;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~25–40 €</span>
+            </a>
+
+            <div class="subsection" style="border-top:1px solid #eef2f5;"><span class="subsection-label" style="color:#27AE60;">● Tapas y casual</span></div>
+            <a class="guia-item" href="https://www.google.com/maps/search/El+Corcho+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#E8F5E9">🍤</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">El Corcho</div>
+                <div class="guia-item-desc">Famoso por sus croquetas, las más pedidas de la ciudad · Interior siempre lleno · Muy auténtico</div>
+              </div>
+              <span style="background:#edfbf3;color:#27AE60;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~10–18 €</span>
+            </a>
+            <a class="guia-item" href="https://www.google.com/maps/search/Restaurante+Jero+Valladolid" target="_blank">
+              <div class="guia-item-icon" style="background:#E8F5E9">🥪</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Restaurante Jero</div>
+                <div class="guia-item-desc">Especialista en canapés y montaditos con nombres curiosos (Messi, Matrix, Zapatero…) · Galardonado en concursos</div>
+              </div>
+              <span style="background:#edfbf3;color:#27AE60;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~10–18 €</span>
+            </a>
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#E8F5E9">📌</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">La Tasquita</div>
+                <div class="guia-item-desc">Siempre lleno, con cola organizada fuera · Sin agobios · Pinchos estrella imprescindibles · Para cenar sin reserva</div>
+              </div>
+              <span style="background:#edfbf3;color:#27AE60;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~10–18 €</span>
+            </div>
+
           </div>
-
-          <div class="subsection"><span class="subsection-label" style="color:#C0392B;">✦ Alta cocina</span></div>
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#FAECE7">🥇</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Villa Paramesa</div>
-              <div class="guia-item-desc">25 años de tradición · Tapas premiadas en concursos nacionales · Plaza Martí y Monsó · Reserva recomendada</div>
-            </div>
-            <span style="background:#fdf0ee;color:#C0392B;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~40–60 €</span>
-          </div>
-
-          <div class="subsection" style="border-top:1px solid #eef2f5;"><span class="subsection-label" style="color:#E67E22;">◆ Gama media</span></div>
-          <a class="guia-item" href="https://www.google.com/maps/search/Los+Zagales+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0">🥂</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Los Zagales</div>
-              <div class="guia-item-desc">Referente de los vinos y tapas vallisoletanos · Siempre en todos los rankings · Reserva recomendable</div>
-            </div>
-            <span style="background:#fff8ee;color:#E67E22;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~25–40 €</span>
-          </a>
-          <a class="guia-item" href="https://www.google.com/maps/search/Restaurante+Don+Bacalao+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#FFF3E0">🐟</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Don Bacalao</div>
-              <div class="guia-item-desc">Especialista en bacalao y cocina castellana de producto · Muy bien valorado por la crítica</div>
-            </div>
-            <span style="background:#fff8ee;color:#E67E22;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~25–40 €</span>
-          </a>
-
-          <div class="subsection" style="border-top:1px solid #eef2f5;"><span class="subsection-label" style="color:#27AE60;">● Tapas y casual</span></div>
-          <a class="guia-item" href="https://www.google.com/maps/search/El+Corcho+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#E8F5E9">🍤</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">El Corcho</div>
-              <div class="guia-item-desc">Famoso por sus croquetas, las más pedidas de la ciudad · Interior siempre lleno · Muy auténtico</div>
-            </div>
-            <span style="background:#edfbf3;color:#27AE60;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~10–18 €</span>
-          </a>
-          <a class="guia-item" href="https://www.google.com/maps/search/Restaurante+Jero+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#E8F5E9">🥪</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Restaurante Jero</div>
-              <div class="guia-item-desc">Especialista en canapés y montaditos con nombres curiosos (Messi, Matrix, Zapatero…) · Galardonado en concursos</div>
-            </div>
-            <span style="background:#edfbf3;color:#27AE60;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~10–18 €</span>
-          </a>
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#E8F5E9">📌</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">La Tasquita</div>
-              <div class="guia-item-desc">Siempre lleno, con cola organizada fuera · Sin agobios · Pinchos estrella imprescindibles · Para cenar sin reserva</div>
-            </div>
-            <span style="background:#edfbf3;color:#27AE60;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;">~10–18 €</span>
-          </div>
-
         </div>
       </div>
-    </div>
 
-    <!-- ── SERVICIOS ── -->
-    <div class="accordion" style="margin-bottom:12px">
-      <div class="accordion-header" onclick="toggleAcc(this)">
-        <div class="accordion-cat-icon" style="background:#E6F1FB">🛎️</div>
-        <span class="accordion-title">Servicios útiles</span>
-        <span class="accordion-count">6</span>
-        <span class="accordion-chevron">›</span>
-      </div>
-      <div class="accordion-body">
-        <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
+      <!-- ── EVENTOS ── -->
+      <div class="accordion" style="margin-bottom:20px">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-cat-icon" style="background:#FFF3E0">🎪</div>
+          <span class="accordion-title">Eventos y fiestas del año</span>
+          <span class="accordion-count">7</span>
+          <span class="accordion-chevron">›</span>
+        </div>
+        <div class="accordion-body">
+          <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Oficina+de+Turismo+Valladolid+Acera+Recoletos" target="_blank">
-            <div class="guia-item-icon" style="background:#dff0f5;margin-top:2px">ℹ️</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Oficina de Turismo</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">9:30 – 14:00 · 16:30 – 19:30</span></div>
-                <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">9:30 – 14:00</span></div>
-                <div class="schedule-note">Acera de Recoletos, s/n · Tel. 983 219 310</div>
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#FCE4EC">🕯️</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Semana Santa</div>
+                <div class="guia-item-desc">Declarada de Interés Turístico Internacional · Procesiones de cofradías centenarias con pasos de Gregorio Fernández · Una de las más importantes de España</div>
               </div>
+              <span style="background:#FCE4EC;color:#C2185B;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Mar – Abr</span>
             </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Mercadona+Valladolid+centro" target="_blank">
-            <div class="guia-item-icon" style="background:#E6F1FB;margin-top:2px">🛒</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Supermercados (cadenas principales)</div>
-              <div class="guia-item-desc">Mercadona, Lidl, Día, Alcampo, Gadis · Amplia cobertura en todos los barrios</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">General</span><span class="schedule-hours">9:00 – 21:30 · Cerrado domingos</span></div>
-                <div class="schedule-note">Alcampo en C/ Sandoval abre 365 días</div>
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#E8F5E9">👑</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Fiestas Patronales — San Pedro Regalado</div>
+                <div class="guia-item-desc">Patrón de la ciudad · Plaza Mayor con conciertos y folclore · Mercado Castellano en Plaza de San Pablo · 1–17 de mayo</div>
               </div>
+              <span style="background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">1–17 Mayo</span>
             </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
 
-          <a class="guia-item" style="align-items:flex-start" href="https://www.google.com/maps/search/Hospital+Río+Hortega+Valladolid" target="_blank">
-            <div class="guia-item-icon" style="background:#E6F1FB;margin-top:2px">🏥</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Hospital Río Hortega</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Urgencias</span><span class="schedule-hours">24 horas · 983 420 400</span></div>
-                <div class="schedule-note">C/ Dulzaina, 2</div>
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#E8F5E9">🍷</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Vino + Tapas</div>
+                <div class="guia-item-desc">Las 5 Denominaciones de Origen de Valladolid (Ribera, Rueda, Cigales, Toro, Arlanza) y alta cocina en miniatura · Acera de Recoletos</div>
               </div>
+              <span style="background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">15–17 Mayo</span>
             </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
 
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#E6F1FB">👮</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Emergencias</div>
-              <div class="guia-item-schedule">
-                <div class="schedule-row"><span class="schedule-days">Emergencias</span><span class="schedule-hours">112</span></div>
-                <div class="schedule-row"><span class="schedule-days">Policía Nacional</span><span class="schedule-hours">091</span></div>
-                <div class="schedule-row"><span class="schedule-days">Policía Local</span><span class="schedule-hours">092</span></div>
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#E3F2FD">🌑</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Eclipse Solar Total 2026</div>
+                <div class="guia-item-desc">Acontecimiento astronómico histórico visible desde Castilla y León · Oportunidad única</div>
               </div>
+              <span style="background:#E3F2FD;color:#1565C0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Agosto 2026</span>
             </div>
+
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#EDE7F6">🌹</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Fiestas de la Virgen de San Lorenzo</div>
+                <div class="guia-item-desc">Segunda fiesta patronal · Verbenas, conciertos y actividades para todos · Una de las mejor organizadas de España</div>
+              </div>
+              <span style="background:#EDE7F6;color:#512DA8;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Septiembre</span>
+            </div>
+
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#FFF3E0">🍢</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">Concurso Nacional de Pinchos y Mundial de la Tapa</div>
+                <div class="guia-item-desc">Evento gastronómico de referencia · Las creaciones premiadas quedan en carta todo el año</div>
+              </div>
+              <span style="background:#FFF3E0;color:#E65100;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Noviembre</span>
+            </div>
+
+            <div class="guia-item" style="cursor:default;">
+              <div class="guia-item-icon" style="background:#ECEFF1">🎬</div>
+              <div class="guia-item-text">
+                <div class="guia-item-name">SEMINCI — Semana Internacional de Cine</div>
+                <div class="guia-item-desc">Uno de los festivales de cine más importantes de España · Premio Espiga de Oro · Teatro Calderón · Desde 1956</div>
+              </div>
+              <span style="background:#ECEFF1;color:#455A64;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Octubre</span>
+            </div>
+
           </div>
-
-          <a class="guia-item" style="align-items:flex-start" href="https://www.auvasa.es" target="_blank">
-            <div class="guia-item-icon" style="background:#E6F1FB;margin-top:2px">🚌</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Autobús urbano (AUVASA)</div>
-              <div class="guia-item-desc">Red completa de autobuses · App y web con horarios en tiempo real</div>
-              <span class="schedule-badge badge-free-cond">auvasa.es · Billete sencillo ~1,30 €</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
-
-          <a class="guia-item" style="align-items:flex-start" href="https://www.renfe.com" target="_blank">
-            <div class="guia-item-icon" style="background:#E6F1FB;margin-top:2px">🚆</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Tren — Estación Valladolid Campo Grande</div>
-              <div class="guia-item-desc">AVE a Madrid en ~55 min · Conexiones a Burgos, Palencia, León y Salamanca</div>
-              <span class="schedule-badge badge-free-cond">renfe.com</span>
-            </div>
-            <span class="guia-item-arrow" style="margin-top:2px">›</span>
-          </a>
-
         </div>
       </div>
+
     </div>
+  </div><!-- /tab-turismo -->
 
-    <!-- ── EVENTOS ── -->
-    <div class="accordion" style="margin-bottom:20px">
-      <div class="accordion-header" onclick="toggleAcc(this)">
-        <div class="accordion-cat-icon" style="background:#FFF3E0">🎪</div>
-        <span class="accordion-title">Eventos y fiestas del año</span>
-        <span class="accordion-count">7</span>
-        <span class="accordion-chevron">›</span>
-      </div>
-      <div class="accordion-body">
-        <div class="guia-list" style="margin:0;border-radius:0;box-shadow:none;">
+  <!-- ════════════════════════════════════
+       TAB: SERVICIOS
+  ════════════════════════════════════ -->
+  <div id="tab-servicios" class="tab-panel active">
+    <div class="guia-page">
+      <div class="servicios-panel">
 
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#FCE4EC">🕯️</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Semana Santa</div>
-              <div class="guia-item-desc">Declarada de Interés Turístico Internacional · Procesiones de cofradías centenarias con pasos de Gregorio Fernández · Una de las más importantes de España</div>
-            </div>
-            <span style="background:#FCE4EC;color:#C2185B;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Mar – Abr</span>
-          </div>
-
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#E8F5E9">👑</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Fiestas Patronales — San Pedro Regalado</div>
-              <div class="guia-item-desc">Patrón de la ciudad · Plaza Mayor con conciertos y folclore · Mercado Castellano en Plaza de San Pablo · 1–17 de mayo</div>
-            </div>
-            <span style="background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">1–17 Mayo</span>
-          </div>
-
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#E8F5E9">🍷</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Vino + Tapas</div>
-              <div class="guia-item-desc">Las 5 Denominaciones de Origen de Valladolid (Ribera, Rueda, Cigales, Toro, Arlanza) y alta cocina en miniatura · Acera de Recoletos</div>
-            </div>
-            <span style="background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">15–17 Mayo</span>
-          </div>
-
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#E3F2FD">🌑</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Eclipse Solar Total 2026</div>
-              <div class="guia-item-desc">Acontecimiento astronómico histórico visible desde Castilla y León · Oportunidad única</div>
-            </div>
-            <span style="background:#E3F2FD;color:#1565C0;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Agosto 2026</span>
-          </div>
-
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#EDE7F6">🌹</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Fiestas de la Virgen de San Lorenzo</div>
-              <div class="guia-item-desc">Segunda fiesta patronal · Verbenas, conciertos y actividades para todos · Una de las mejor organizadas de España</div>
-            </div>
-            <span style="background:#EDE7F6;color:#512DA8;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Septiembre</span>
-          </div>
-
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#FFF3E0">🍢</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">Concurso Nacional de Pinchos y Mundial de la Tapa</div>
-              <div class="guia-item-desc">Evento gastronómico de referencia · Las creaciones premiadas quedan en carta todo el año</div>
-            </div>
-            <span style="background:#FFF3E0;color:#E65100;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Noviembre</span>
-          </div>
-
-          <div class="guia-item" style="cursor:default;">
-            <div class="guia-item-icon" style="background:#ECEFF1">🎬</div>
-            <div class="guia-item-text">
-              <div class="guia-item-name">SEMINCI — Semana Internacional de Cine</div>
-              <div class="guia-item-desc">Uno de los festivales de cine más importantes de España · Premio Espiga de Oro · Teatro Calderón · Desde 1956</div>
-            </div>
-            <span style="background:#ECEFF1;color:#455A64;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;">Octubre</span>
-          </div>
-
+        <div class="servicios-intro">
+          <div class="servicios-intro-icon">🛎️</div>
+          <div class="servicios-intro-title">Servicios útiles</div>
+          <div class="servicios-intro-desc">Todo lo que puedes necesitar durante tu estancia en Valladolid</div>
         </div>
+
+        <!-- Botón principal -->
+        <a class="servicios-cta-btn" href="servicios_utiles.html">
+          <div class="servicios-cta-left">
+            <div class="servicios-cta-icon">🛎️</div>
+            <div>
+              <div class="servicios-cta-text-title">Servicios útiles</div>
+              <div class="servicios-cta-text-sub">Turismo · Compras · Salud · Transporte</div>
+            </div>
+          </div>
+          <span class="servicios-cta-arrow">›</span>
+        </a>
+
+        <!-- Mini preview de categorías -->
+        <div class="servicios-grid">
+          <div class="servicios-pill">
+            <span class="servicios-pill-icon">ℹ️</span>
+            <span class="servicios-pill-label">Oficina de Turismo</span>
+          </div>
+          <div class="servicios-pill">
+            <span class="servicios-pill-icon">🛒</span>
+            <span class="servicios-pill-label">Supermercados</span>
+          </div>
+          <div class="servicios-pill">
+            <span class="servicios-pill-icon">🏥</span>
+            <span class="servicios-pill-label">Hospital</span>
+          </div>
+          <div class="servicios-pill">
+            <span class="servicios-pill-icon">👮</span>
+            <span class="servicios-pill-label">Emergencias</span>
+          </div>
+          <div class="servicios-pill">
+            <span class="servicios-pill-icon">🚌</span>
+            <span class="servicios-pill-label">Bus urbano</span>
+          </div>
+          <div class="servicios-pill">
+            <span class="servicios-pill-icon">🚆</span>
+            <span class="servicios-pill-label">Tren AVE</span>
+          </div>
+        </div>
+
       </div>
     </div>
+  </div><!-- /tab-servicios -->
 
-  </div>
 </div>
 
 <script>
@@ -584,6 +701,18 @@ function toggleAcc(header) {
     header.classList.add('open');
   }
   document.body.classList.toggle('acc-open', !isOpen);
+}
+
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
+  // close any open accordions when switching
+  document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.accordion-chevron').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('open'));
+  document.body.classList.remove('acc-open');
 }
 </script>
 </body>
