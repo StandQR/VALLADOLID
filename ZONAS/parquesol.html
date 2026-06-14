@@ -9,20 +9,29 @@
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #f0f4f7;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .header {
     background: #3A5068;
     color: #EAF4F8;
-    padding: 14px 16px 12px;
+    padding: 14px 16px 0;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
     flex-shrink: 0;
     position: sticky;
     top: 0;
     z-index: 10;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
   }
   .header-back {
     width: 30px; height: 30px;
@@ -37,7 +46,37 @@
   .header-title { font-size: 15px; font-weight: 600; }
   .header-sub { font-size: 11px; opacity: 0.7; margin-top: 1px; }
 
-  .page { padding: 0 0 32px; }
+  .legal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px 14px;
+    background: #f0f4f7;
+    flex-shrink: 0;
+    border-top: 1px solid #d8e4ec;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  .legal-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .legal-links a {
+    font-size: 10.5px;
+    color: #7a9ab0;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .legal-links a:hover { color: #3A5068; }
+  .legal-links-sep { font-size: 9px; color: #b0c4d0; }
+  .legal-brand { font-size: 9px; color: #b0c4d0; letter-spacing: 0.04em; }
+
+  .page { padding: 0 0 80px; flex: 1; overflow-y: auto; min-height: 0; }
 
   .section-title {
     font-size: 11px; font-weight: 700; color: #7bbfcc;
@@ -98,54 +137,55 @@
   .number-val.emergency { color: #C0392B; font-size: 17px; }
 
   /* Hero banner */
-  .hero {
-    background: linear-gradient(135deg, #3A5068 0%, #4d6a87 100%);
-    margin: 0;
-    padding: 20px 16px 22px;
-    color: #EAF4F8;
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.12);
   }
-  .hero-icon { font-size: 36px; margin-bottom: 6px; }
-  .hero-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-  .hero-sub { font-size: 13px; opacity: 0.7; line-height: 1.4; }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: rgba(234,244,248,0.6);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 0 8px;
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    text-align: center;
+    transition: color 0.2s;
+  }
+  .tab-btn.active { color: #EAF4F8; }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 16px; right: 16px;
+    height: 2px;
+    background: #7bbfcc;
+    border-radius: 2px 2px 0 0;
+  }
+
 </style>
 </head>
 <body>
 
 <div class="header">
-  <a class="header-back" href="info_valladolid.html">‹</a>
-  <div>
-    <div class="header-title">Servicios útiles</div>
-    <div class="header-sub">Valladolid</div>
+  <div class="header-top">
+    <a class="header-back" href="info_valladolid.html">‹</a>
+    <div>
+      <div class="header-title">Servicios útiles</div>
+      <div class="header-sub">Valladolid</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <a class="tab-btn" href="info_valladolid.html">🗺️ Turismo</a>
+    <a class="tab-btn active" href="servicios_utiles.html">🛎️ Servicios</a>
   </div>
 </div>
 
 <div class="page">
-
-  <!-- Hero -->
-  <div class="hero">
-    <div class="hero-icon">🛎️</div>
-    <div class="hero-title">Todo lo que necesitas</div>
-    <div class="hero-sub">Información práctica para tu estancia en Valladolid</div>
-  </div>
-
-  <!-- ── INFORMACIÓN Y TURISMO ── -->
-  <div class="section-title">Información y turismo</div>
-  <div class="card-list">
-
-    <a class="card" href="https://www.google.com/maps/search/Oficina+de+Turismo+Valladolid+Acera+Recoletos" target="_blank">
-      <div class="card-icon" style="background:#dff0f5;">ℹ️</div>
-      <div class="card-body">
-        <div class="card-name">Oficina de Turismo</div>
-        <div class="schedule">
-          <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">9:30 – 14:00 · 16:30 – 19:30</span></div>
-          <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">9:30 – 14:00</span></div>
-          <div class="schedule-note">Acera de Recoletos, s/n · Tel. 983 219 310</div>
-        </div>
-      </div>
-      <span class="card-arrow">›</span>
-    </a>
-
-  </div>
 
   <!-- ── COMPRAS ── -->
   <div class="section-title">Compras</div>
@@ -229,6 +269,16 @@
       <span class="card-arrow">›</span>
     </a>
 
+  </div>
+
+  <!-- Pie legal -->
+  <div class="legal-footer">
+    <div class="legal-links">
+      <a href="https://apartamentosgo.com/politica-de-privacidad/" target="_blank">Política de privacidad</a>
+      <span class="legal-links-sep">·</span>
+      <a href="https://apartamentosgo.com/aviso-legal/" target="_blank">Aviso legal</a>
+    </div>
+    <div class="legal-brand">Diseñado por StandQR</div>
   </div>
 
 </div>
