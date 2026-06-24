@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Servicios útiles — Grupo Oliveira</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f4f7;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    background: #3A5068;
+    color: #EAF4F8;
+    padding: 14px 16px 0;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .header-back {
+    width: 30px; height: 30px;
+    background: rgba(255,255,255,0.15);
+    border: none; border-radius: 50%;
+    color: #EAF4F8; font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; line-height: 1;
+    text-decoration: none;
+  }
+  .header-title { font-size: 15px; font-weight: 600; }
+  .header-sub { font-size: 11px; opacity: 0.7; margin-top: 1px; }
+
+  .legal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px 14px;
+    background: #f0f4f7;
+    flex-shrink: 0;
+    border-top: 1px solid #d8e4ec;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  .legal-links {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .legal-links a {
+    font-size: 10.5px;
+    color: #7a9ab0;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .legal-links a:hover { color: #3A5068; }
+  .legal-links-sep { font-size: 9px; color: #b0c4d0; }
+  .legal-brand { font-size: 9px; color: #b0c4d0; letter-spacing: 0.04em; }
+
+  .page { padding: 0 0 80px; flex: 1; overflow-y: auto; min-height: 0; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; color: #7bbfcc;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    padding: 18px 16px 8px;
+  }
+
+  .card-list {
+    display: flex; flex-direction: column; gap: 0;
+    margin: 0 16px;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+
+  .card {
+    background: white;
+    display: flex; align-items: flex-start; gap: 13px;
+    padding: 14px;
+    border-bottom: 1px solid #eef2f5;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .card:last-child { border-bottom: none; }
+  .card:active { background: #f5f9fb; }
+
+  .card-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px; flex-shrink: 0; margin-top: 1px;
+  }
+  .card-body { flex: 1; }
+  .card-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px; }
+  .card-arrow { color: #ccc; font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+
+  .schedule { display: flex; flex-direction: column; gap: 4px; }
+  .schedule-row { display: flex; align-items: baseline; gap: 6px; font-size: 11px; line-height: 1.4; }
+  .schedule-days {
+    font-weight: 700; color: #3A5068; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    min-width: 82px; flex-shrink: 0;
+  }
+  .schedule-hours { color: #666; font-size: 11px; }
+  .schedule-note { font-size: 10px; color: #aaa; font-style: italic; margin-top: 3px; }
+  .badge {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    padding: 2px 8px; border-radius: 20px; margin-top: 5px;
+  }
+  .badge-blue { background: #EEF0FA; color: #3A5068; }
+  .badge-green { background: #e8f8f0; color: #27AE60; }
+
+  .desc { font-size: 12px; color: #888; line-height: 1.5; margin-bottom: 5px; }
+
+  /* Emergency numbers card */
+  .numbers-grid { display: flex; flex-direction: column; gap: 4px; }
+  .number-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+  .number-label { color: #555; font-weight: 500; }
+  .number-val { font-weight: 800; color: #3A5068; font-size: 15px; letter-spacing: 0.04em; }
+  .number-val.emergency { color: #C0392B; font-size: 17px; }
+
+  /* Hero banner */
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: rgba(234,244,248,0.6);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 0 8px;
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    text-align: center;
+    transition: color 0.2s;
+  }
+  .tab-btn.active { color: #EAF4F8; }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 16px; right: 16px;
+    height: 2px;
+    background: #7bbfcc;
+    border-radius: 2px 2px 0 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <a class="header-back" href="../info_valladolid.html">‹</a>
+    <div>
+      <div class="header-title">Servicios útiles</div>
+      <div class="header-sub">Valladolid</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <a class="tab-btn" href="../info_valladolid.html">🗺️ Turismo</a>
+    <a class="tab-btn active" href="../circular.html">🛎️ Servicios</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ── SUPERMERCADOS ── -->
+  <div class="section-title">Supermercados</div>
+  <div class="card-list">
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Supermercados+Dia&query_place_id=ChIJ06mUa4ITRw0R3scyslsNsgE" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🛒</div>
+      <div class="card-body">
+        <div class="card-name">Dia</div>
+        <div class="desc">El más cercano al alojamiento, en la propia Plaza Circular · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">9:00 – 21:30</span></div>
+          <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">Cerrado</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Mercadona&query_place_id=ChIJQ4QfMLcSRw0RxNnxUSKXR2I" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🛒</div>
+      <div class="card-body">
+        <div class="card-name">Mercadona</div>
+        <div class="desc">A pocos minutos a pie del alojamiento · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">9:00 – 21:30</span></div>
+          <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">Cerrado</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Supermercados+Gadis&query_place_id=ChIJSw1DKLESRw0RFNtMxOALv3c" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🛒</div>
+      <div class="card-body">
+        <div class="card-name">Gadis</div>
+        <div class="desc">Amplia variedad de productos, a corta distancia · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Sáb</span><span class="schedule-hours">9:15 – 21:15</span></div>
+          <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">Cerrado</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- ── BANCOS ── -->
+  <div class="section-title">Bancos</div>
+  <div class="card-list">
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Cajero+BBVA&query_place_id=ChIJe-_oYbcSRw0RlI4iIghfEx8" target="_blank">
+      <div class="card-icon" style="background:#EEEDFE;">🏦</div>
+      <div class="card-body">
+        <div class="card-name">Cajero BBVA</div>
+        <div class="desc">Cajero automático en la Plaza Circular, abierto 24h · Pulsa para ver ubicación</div>
+        <span class="badge badge-blue">Abierto 24h</span>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Cajero+Unicaja&query_place_id=ChIJwdOeyLkSRw0RJ6B9JdMLaZI" target="_blank">
+      <div class="card-icon" style="background:#EEEDFE;">🏦</div>
+      <div class="card-body">
+        <div class="card-name">Cajero Unicaja Banco</div>
+        <div class="desc">Cajero automático en la Plaza Circular, abierto 24h · Pulsa para ver ubicación</div>
+        <span class="badge badge-blue">Abierto 24h</span>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- ── OTROS SERVICIOS ── -->
+  <div class="section-title">Otros servicios</div>
+  <div class="card-list">
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Oficina+de+Correos&query_place_id=ChIJ-Qda7cgSRw0R-ntceKisfsc" target="_blank">
+      <div class="card-icon" style="background:#FFF3E0;">📮</div>
+      <div class="card-body">
+        <div class="card-name">Oficina de Correos</div>
+        <div class="desc">Envío y recogida de paquetes y cartas · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Vie</span><span class="schedule-hours">8:30 – 20:30</span></div>
+          <div class="schedule-row"><span class="schedule-days">Sáb – Dom</span><span class="schedule-hours">Cerrado</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Lacolada+Lavanderia&query_place_id=ChIJa4OnnuITRw0RC4nHd3_M1mA" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🧺</div>
+      <div class="card-body">
+        <div class="card-name">Lacolada — Lavandería autoservicio</div>
+        <div class="desc">Lavadoras y secadoras de gran capacidad, muy cerca del alojamiento · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Todos los días</span><span class="schedule-hours">8:00 – 22:00</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- ── COMIDA RÁPIDA Y DELIVERY ── -->
+  <div class="section-title">Comida rápida y delivery</div>
+  <div class="card-list">
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=KFC&query_place_id=ChIJs2DQnTJtRw0RhkBv8bP_1jk" target="_blank">
+      <div class="card-icon" style="background:#fdf0ee;">🍗</div>
+      <div class="card-body">
+        <div class="card-name">KFC</div>
+        <div class="desc">Pollo frito, la opción más cercana al alojamiento, muy bien valorada · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Jue</span><span class="schedule-hours">12:30 – 23:00</span></div>
+          <div class="schedule-row"><span class="schedule-days">Vie – Sáb</span><span class="schedule-hours">12:30 – 00:00</span></div>
+          <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">12:30 – 23:30</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- ── SALUD Y EMERGENCIAS ── -->
+  <div class="section-title">Salud y emergencias</div>
+  <div class="card-list">
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Centro+de+salud+Pilarica+Circular&query_place_id=ChIJA273tbsSRw0Rtkqjjkn8BFU" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🏥</div>
+      <div class="card-body">
+        <div class="card-name">Centro de Salud Pilarica Circular</div>
+        <div class="desc">Atención primaria, el más cercano al alojamiento · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Vie</span><span class="schedule-hours">7:30 – 20:00</span></div>
+          <div class="schedule-row"><span class="schedule-days">Sáb – Dom</span><span class="schedule-hours">Cerrado</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card" href="https://www.google.com/maps/search/?api=1&query=Farmacia+Maria+Gonzalez+Gamazo&query_place_id=ChIJ-52kwMYTRw0RRNBPox788qY" target="_blank">
+      <div class="card-icon" style="background:#E8F5E9;">💊</div>
+      <div class="card-body">
+        <div class="card-name">Farmacia</div>
+        <div class="desc">En la propia C/ Industrias, a pocos pasos del alojamiento · Pulsa para ver ubicación</div>
+        <div class="schedule">
+          <div class="schedule-row"><span class="schedule-days">Lun – Vie</span><span class="schedule-hours">9:30–13:45 · 17:00–20:00</span></div>
+          <div class="schedule-row"><span class="schedule-days">Sábado</span><span class="schedule-hours">10:00 – 13:45</span></div>
+          <div class="schedule-row"><span class="schedule-days">Domingo</span><span class="schedule-hours">Cerrado</span></div>
+        </div>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <div class="card" style="cursor:default;">
+      <div class="card-icon" style="background:#fdf0ee;">👮</div>
+      <div class="card-body">
+        <div class="card-name">Números de emergencia</div>
+        <div class="numbers-grid" style="margin-top:6px;">
+          <div class="number-row">
+            <span class="number-label">🆘 Emergencias</span>
+            <span class="number-val emergency">112</span>
+          </div>
+          <div class="number-row">
+            <span class="number-label">👮 Policía Nacional</span>
+            <span class="number-val">091</span>
+          </div>
+          <div class="number-row">
+            <span class="number-label">🚔 Policía Local</span>
+            <span class="number-val">092</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── TRANSPORTE ── -->
+  <div class="section-title">Transporte</div>
+  <div class="card-list">
+
+    <a class="card" href="https://www.auvasa.es" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🚌</div>
+      <div class="card-body">
+        <div class="card-name">Autobús urbano (AUVASA)</div>
+        <div class="desc">Red completa de autobuses · App y web con horarios en tiempo real</div>
+        <span class="badge badge-blue">auvasa.es · Billete sencillo ~1,30 €</span>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card" href="https://www.renfe.com" target="_blank">
+      <div class="card-icon" style="background:#E6F1FB;">🚆</div>
+      <div class="card-body">
+        <div class="card-name">Tren — Estación Valladolid Campo Grande</div>
+        <div class="desc">AVE a Madrid en ~55 min · Conexiones a Burgos, Palencia, León y Salamanca</div>
+        <span class="badge badge-blue">renfe.com</span>
+      </div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- Pie legal -->
+  <div class="legal-footer">
+    <div class="legal-links">
+      <a href="https://apartamentosgo.com/politica-de-privacidad/" target="_blank">Política de privacidad</a>
+      <span class="legal-links-sep">·</span>
+      <a href="https://apartamentosgo.com/aviso-legal/" target="_blank">Aviso legal</a>
+    </div>
+    <div class="legal-brand">Diseñado por StandQR</div>
+  </div>
+
+</div>
+</body>
+</html>
