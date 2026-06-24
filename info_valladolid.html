@@ -213,7 +213,7 @@
     </div>
     <div class="tabs">
       <a class="tab-btn active" href="info_valladolid.html">🗺️ Turismo</a>
-      <a class="tab-btn" href="ZONAS/parquesol.html">🛎️ Servicios</a>
+      <a id="enlace-servicios" class="tab-btn" href="ZONAS/parquesol.html">🛎️ Servicios</a>
     </div>
   </div>
 
@@ -585,6 +585,29 @@ function toggleAcc(header) {
     header.classList.add('open');
   }
 }
+</script>
+<script>
+  const paginaAnterior = document.referrer.toUpperCase();
+  const botonServicios = document.getElementById('enlace-servicios');
+
+  const mapeoZonas = {
+    'COVARESA':  'ZONAS/covaresa.html',
+    'CIRCULAR':  'ZONAS/circular.html',
+    'FELIPE_II': 'ZONAS/felipe_ii.html',
+    'GENOVA':    'ZONAS/genova.html',
+    'LEOPOLDO':  'ZONAS/parquesol.html'
+  };
+
+  let enlaceFinal = 'ZONAS/normas.html';
+
+  for (const [edificio, archivoZona] of Object.entries(mapeoZonas)) {
+    if (paginaAnterior.includes(edificio)) {
+      enlaceFinal = archivoZona;
+      break;
+    }
+  }
+
+  botonServicios.href = enlaceFinal;
 </script>
 </body>
 </html>
