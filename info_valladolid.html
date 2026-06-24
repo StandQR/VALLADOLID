@@ -213,7 +213,7 @@
     </div>
     <div class="tabs">
       <a class="tab-btn active" href="info_valladolid.html">🗺️ Turismo</a>
-      <a id="enlace-servicios" class="tab-btn" href="ZONAS/parquesol.html">🛎️ Servicios</a>
+      <a id="tab-servicios" class="tab-btn" href="ZONAS/parquesol.html">🛎️ Servicios</a>
     </div>
   </div>
 
@@ -572,6 +572,7 @@
 </div>
 
 <script>
+// 1. Función original para los acordeones
 function toggleAcc(header) {
   const chevron = header.querySelector('.accordion-chevron');
   const body = header.nextElementSibling;
@@ -585,29 +586,33 @@ function toggleAcc(header) {
     header.classList.add('open');
   }
 }
-</script>
-<script>
+
+// 2. Detectar automáticamente de qué edificio viene el usuario
+window.addEventListener('DOMContentLoaded', () => {
   const paginaAnterior = document.referrer.toUpperCase();
-  const botonServicios = document.getElementById('enlace-servicios');
+  const tabServicios = document.getElementById('tab-servicios');
 
-  const mapeoZonas = {
-    'COVARESA':  'ZONAS/covaresa.html',
-    'CIRCULAR':  'ZONAS/circular.html',
-    'FELIPE_II': 'ZONAS/felipe_ii.html',
-    'GENOVA':    'ZONAS/genova.html',
-    'LEOPOLDO':  'ZONAS/parquesol.html'
-  };
+  if (tabServicios) {
+    const mapeoZonas = {
+      'CIRCULAR':  'ZONAS/circular.html',
+      'COVARESA':  'ZONAS/covaresa.html',
+      'FELIPE_II': 'ZONAS/felipe_ii.html',
+      'GENOVA':    'ZONAS/genova.html',
+      'LEOPOLDO':  'ZONAS/parquesol.html'
+    };
 
-  let enlaceFinal = 'ZONAS/normas.html';
+    let enlaceFinal = 'ZONAS/parquesol.html';
 
-  for (const [edificio, archivoZona] of Object.entries(mapeoZonas)) {
-    if (paginaAnterior.includes(edificio)) {
-      enlaceFinal = archivoZona;
-      break;
+    for (const [edificio, archivoZona] of Object.entries(mapeoZonas)) {
+      if (paginaAnterior.includes(edificio)) {
+        enlaceFinal = archivoZona;
+        break;
+      }
     }
-  }
 
-  botonServicios.href = enlaceFinal;
+    tabServicios.href = enlaceFinal;
+  }
+});
 </script>
 </body>
 </html>
