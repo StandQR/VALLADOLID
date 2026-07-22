@@ -72,45 +72,46 @@
   /* HOME */
   .home-hero {
     background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),url('../../foto_valladolid.jpg') center/cover no-repeat;
-    padding: 35px 20px 20px;
+    padding: 18px 20px 12px;
     color: #ffffff;
     text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     text-align: center;
     flex-shrink: 0;
   }
   .home-logo {
-    width: 64px; height: 64px;
+    width: 46px; height: 46px;
     background: rgba(255,255,255,0.15);
-    border-radius: 18px;
-    margin: 0 auto 14px;
+    border-radius: 14px;
+    margin: 0 auto 8px;
     display: flex; align-items: center; justify-content: center;
     font-size: 32px;
     border: 1px solid rgba(255,255,255,0.2);
   }
-  .home-name { font-size: 20px; font-weight: 700; margin-bottom: 5px; letter-spacing: -0.3px; }
-  .home-tagline { font-size: 13px; opacity: 0.9; }
+  .home-name { font-size: 18px; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.3px; }
+  .home-tagline { font-size: 11.5px; opacity: 0.9; }
   .home-divider {
     height: 3px;
     background: linear-gradient(90deg, transparent, rgba(123,191,204,0.5), transparent);
-    margin: 16px 40px 0;
+    margin: 10px 40px 0;
   }
 
   .menu-grid {
-    padding: 14px 16px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 8px;
     background: #f0f4f7;
     flex: 1;
-    overflow-y: auto;
     min-height: 0;
+    overflow: hidden;
   }
   .legal-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    padding: 10px 16px 14px;
+    gap: 4px;
+    padding: 6px 16px 10px;
     background: #f0f4f7;
     flex-shrink: 0;
     border-top: 1px solid #d8e4ec;
@@ -139,31 +140,38 @@
   .menu-card {
     background: white;
     border: 1px solid #d0dde6;
-    border-radius: 16px;
-    padding: 13px 14px;
+    border-radius: 14px;
+    padding: 6px 6px;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 14px;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
     transition: transform 0.15s, box-shadow 0.15s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    min-height: 0;
+    overflow: hidden;
   }
   .menu-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.10); }
   .menu-card:active { transform: scale(0.98); }
   .menu-icon {
-    width: 50px; height: 50px;
-    border-radius: 14px;
+    width: 38px; height: 38px;
+    border-radius: 11px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
+    font-size: 18px;
     flex-shrink: 0;
   }
   .icon-map { background: #dff0f5; }
   .icon-normas { background: #EEF0FA; }
   .icon-wifi { background: #dff0f5; }
   .icon-form { background: #e8f0f5; }
-  .menu-text-title { font-size: 15px; font-weight: 600; color: #2a2a2a; }
-  .menu-text-sub { font-size: 12px; color: #888; margin-top: 3px; }
-  .menu-arrow { margin-left: auto; color: #ccc; font-size: 20px; font-weight: 300; }
+  .icon-instrucciones { background: #e7f3e9; }
+  .icon-faq { background: #fdf1e3; }
+  .menu-text-title { font-size: 11.5px; font-weight: 600; color: #2a2a2a; line-height: 1.2; }
+  .menu-text-sub { display: none; }
+  .menu-arrow { display: none; }
 
 
   .schedule-days { font-weight: 700; color: #3A5068; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; min-width: 70px; }
@@ -188,37 +196,29 @@
         <div class="home-divider"></div>
       </div>
       <div class="menu-grid">
+        <div class="menu-card" onclick="location.href='../../instrucciones.html'">
+          <div class="menu-icon icon-instrucciones">🔑</div>
+          <div class="menu-text-title">Instrucciones</div>
+        </div>
         <div class="menu-card" onclick="location.href='../../normas.html'">
           <div class="menu-icon icon-normas">📋</div>
-          <div>
-            <div class="menu-text-title">Normas del apartamento</div>
-            <div class="menu-text-sub">Servicios incluidos y régimen interno</div>
-          </div>
-          <span class="menu-arrow">›</span>
+          <div class="menu-text-title">Normas del apartamento</div>
         </div>
         <div class="menu-card" onclick="location.href='../../info_valladolid.html'">
           <div class="menu-icon icon-map">🗺️</div>
-          <div>
-            <div class="menu-text-title">Información de interés</div>
-            <div class="menu-text-sub">Monumentos, restaurantes y servicios</div>
-          </div>
-          <span class="menu-arrow">›</span>
+          <div class="menu-text-title">Información de interés</div>
         </div>
-        <div class="menu-card" onclick="window.open('https://tally.so/r/b5NpA0?APARTAMENTO=Genova_1','_blank')">
-          <div class="menu-icon icon-form">💬</div>
-          <div>
-            <div class="menu-text-title">Sugerencias y reclamaciones</div>
-            <div class="menu-text-sub">Cuéntanos cómo va tu estancia</div>
-          </div>
-          <span class="menu-arrow">›</span>
+        <div class="menu-card" onclick="location.href='../../FAQ.html'">
+          <div class="menu-icon icon-faq">❓</div>
+          <div class="menu-text-title">Preguntas frecuentes</div>
         </div>
         <div class="menu-card" onclick="location.href='../wifi.html'">
           <div class="menu-icon icon-wifi">🛜</div>
-          <div>
-            <div class="menu-text-title">WiFi del apartamento</div>
-            <div class="menu-text-sub">Red y contraseña de acceso</div>
-          </div>
-          <span class="menu-arrow">›</span>
+          <div class="menu-text-title">WiFi del apartamento</div>
+        </div>
+        <div class="menu-card" onclick="window.open('https://tally.so/r/b5NpA0?APARTAMENTO=Genova_1','_blank')">
+          <div class="menu-icon icon-form">💬</div>
+          <div class="menu-text-title">Sugerencias y reclamaciones</div>
         </div>
 
       </div>
