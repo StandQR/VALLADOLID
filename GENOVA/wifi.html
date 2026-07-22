@@ -3,21 +3,15 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WiFi del apartamento</title>
+<title>WiFi del apartamento — Grupo Oliveira</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #f0f4f7;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
@@ -25,150 +19,155 @@
   /* Header */
   .header {
     background: #3A5068;
-    color: #EAF4F8;
-    padding: 14px 16px 12px;
+    color: white;
+    padding: 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
+    gap: 12px;
     position: sticky;
     top: 0;
     z-index: 10;
   }
   .header-back {
-    width: 30px; height: 30px;
     background: rgba(255,255,255,0.15);
     border: none;
-    border-radius: 50%;
-    color: #EAF4F8;
-    font-size: 18px;
+    color: white;
+    font-size: 22px;
+    width: 36px; height: 36px;
+    border-radius: 10px;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    line-height: 1;
     text-decoration: none;
+    flex-shrink: 0;
   }
-  .header-title { font-size: 15px; font-weight: 600; }
+  .header-title { font-size: 16px; font-weight: 700; }
+  .header-sub { font-size: 12px; opacity: 0.75; margin-top: 2px; }
 
-  /* WiFi */
-  .wifi-page {
-    padding: 10px;
-    background: #f0f4f7;
-    flex: 1;
-    overflow-y: auto;
+  /* Content */
+  .normas-page { padding: 0; background: #f0f4f7; flex: 1; overflow-y: auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+  .normas-block { margin: 14px 16px 0; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .normas-block-header {
+    background: #3A5068; color: white;
+    padding: 12px 16px;
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
   }
+  .normas-block-body { padding: 14px 16px; }
+  .normas-text-block { font-size: 13px; color: #444; line-height: 1.6; padding: 4px 0; }
+
+  .wifi-hero-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 6px;
+    border-radius: 18px;
+    background: #dff0f5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+
   .wifi-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 10px;
   }
-  .wifi-header-bar {
-    background: linear-gradient(135deg, #7bbfcc, #3A5068);
-    padding: 14px;
-    text-align: center;
-    color: white;
+  .wifi-pill {
+    flex: 1; min-width: 130px;
+    background: #f0f4f7; border-radius: 10px;
+    padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 4px;
   }
-  .wifi-icon-lg { font-size: 28px; margin-bottom: 8px; }
-  .wifi-header-title { font-size: 16px; font-weight: 600; }
-  .wifi-header-sub { font-size: 12px; opacity: 0.75; margin-top: 3px; }
-  .wifi-body { padding: 4px 16px; }
-  .wifi-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid #f0f0f0; }
-  .wifi-row:last-child { border-bottom: none; }
-  .wifi-label { font-size: 13px; color: #888; }
-  .wifi-val-wrap { display: flex; align-items: center; gap: 8px; }
-  .wifi-val { font-size: 14px; font-weight: 600; color: #1a1a1a; font-family: 'Courier New', monospace; }
-  .copy-btn {
-    background: #f0f4f7;
-    border: 1px solid #c8d8e4;
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-size: 11px;
+  .wifi-pill-label { font-size: 10.5px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+  .wifi-pill-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .wifi-pill-value { font-size: 16px; color: #3A5068; font-weight: 700; font-family: 'SFMono-Regular', Consolas, monospace; word-break: break-all; }
+  .wifi-copy-btn {
+    background: #EEF0FA; color: #3A5068;
+    border: none; border-radius: 8px;
+    font-size: 11px; font-weight: 700;
+    padding: 6px 10px;
     cursor: pointer;
-    color: #888;
-    font-family: inherit;
-    transition: all 0.2s;
+    flex-shrink: 0;
+    transition: background 0.15s;
   }
-  .copy-btn:hover { background: #d4eaf0; }
-  .copy-btn.copied { color: #3A5068; border-color: #3A5068; background: #dff0f5; }
-  .qr-section { padding: 20px; text-align: center; }
-  .qr-title { font-size: 13px; color: #888; margin-bottom: 14px; font-weight: 500; }
-  .qr-box {
-    width: 150px; height: 150px;
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #f8fbfc;
+  .wifi-copy-btn:active { background: #dbe0f5; }
+  .wifi-copy-btn.copied { background: #e8f8f0; color: #27AE60; }
+
+  .legal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px 14px;
+    background: #f0f4f7;
+    flex-shrink: 0;
+    border-top: 1px solid #d8e4ec;
   }
-  .qr-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .qr-note { font-size: 11px; color: #aaa; margin-top: 12px; }
+  .legal-links { display: flex; gap: 6px; align-items: center; }
+  .legal-links a { font-size: 10.5px; color: #7a9ab0; text-decoration: none; letter-spacing: 0.01em; }
+  .legal-links a:hover { color: #3A5068; }
+  .legal-links-sep { font-size: 9px; color: #b0c4d0; }
+  .legal-brand { font-size: 9px; color: #b0c4d0; letter-spacing: 0.04em; }
 </style>
 </head>
 <body>
 
   <div class="header">
-    <a class="header-back" href="index.html">‹</a>
-    <div><div class="header-title">WiFi del apartamento</div></div>
+    <a class="header-back" onclick="history.back()">‹</a>
+    <div>
+      <div class="header-title">WiFi del apartamento</div>
+      <div class="header-sub">Grupo Oliveira · Apartamentos Génova</div>
+    </div>
   </div>
 
-  <div class="wifi-page">
-    <div class="wifi-card">
-      <div class="wifi-header-bar">
-        <div class="wifi-icon-lg">🛜</div>
-        <div class="wifi-header-title">Conexión WiFi gratuita</div>
-        <div class="wifi-header-sub">Incluida en tu estancia</div>
-      </div>
-      <div class="wifi-body">
-        <div class="wifi-row">
-          <span class="wifi-label">Red (SSID)</span>
-          <div class="wifi-val-wrap">
-            <span class="wifi-val">Genova</span>
-            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent, this)">copiar</button>
+  <div class="normas-page">
+
+    <div class="normas-block">
+      <div class="normas-block-header">🛜 Conexión WiFi</div>
+      <div class="normas-block-body">
+        <div class="wifi-hero-icon">📶</div>
+        <div class="normas-text-block" style="text-align:center;">El apartamento cuenta con WiFi de alta velocidad.</div>
+        <div class="wifi-card">
+          <div class="wifi-pill">
+            <div class="wifi-pill-label">Red</div>
+            <div class="wifi-pill-row">
+              <span class="wifi-pill-value" id="wifi-ssid">Genova</span>
+              <button class="wifi-copy-btn" onclick="copyValue('wifi-ssid', this)">Copiar</button>
+            </div>
           </div>
-        </div>
-        <div class="wifi-row"> 
-          <span class="wifi-label">Contraseña</span>
-          <div class="wifi-val-wrap">
-            <span class="wifi-val">Amadeo24</span>
-            <button class="copy-btn" onclick="copyText(this.previousElementSibling.textContent, this)">copiar</button>
+          <div class="wifi-pill">
+            <div class="wifi-pill-label">Contraseña</div>
+            <div class="wifi-pill-row">
+              <span class="wifi-pill-value" id="wifi-pass">Amadeo24</span>
+              <button class="wifi-copy-btn" onclick="copyValue('wifi-pass', this)">Copiar</button>
+            </div>
           </div>
-        </div>
-        <div class="wifi-row">
-          <span class="wifi-label">Seguridad</span>
-          <div class="wifi-val-wrap"><span class="wifi-val">WPA2</span></div>
         </div>
       </div>
     </div>
-    <div class="wifi-card">
-      <div class="qr-section">
-        <div class="qr-title">Escanea para conectarte automáticamente</div>
-        <div class="qr-box">
-          <img src="qr_wifi.jpg" alt="QR WiFi"/>
-        </div>
-        <div class="qr-note">Apunta la cámara · No necesitas ninguna app</div>
-      </div>
+
+  </div>
+
+  <!-- Pie legal -->
+  <div class="legal-footer">
+    <div class="legal-links">
+      <a href="https://apartamentosgo.com/politica-de-privacidad/" target="_blank">Política de privacidad</a>
+      <span class="legal-links-sep">·</span>
+      <a href="https://apartamentosgo.com/aviso-legal/" target="_blank">Aviso legal</a>
     </div>
+    <div class="legal-brand">Diseñado por StandQR</div>
   </div>
 
 <script>
-function copyText(txt, btn) {
-  try {
-    const el = document.createElement('textarea');
-    el.value = txt;
-    el.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
-    document.body.appendChild(el);
-    el.focus();
-    el.select();
-    el.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    btn.textContent = '✓ copiado'; btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'copiar'; btn.classList.remove('copied'); }, 2000);
-  } catch(e) {
-    btn.textContent = '✗ error'; setTimeout(() => btn.textContent = 'copiar', 1500);
-  }
+function copyValue(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
 }
 </script>
+
 </body>
 </html>
