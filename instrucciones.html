@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Instrucciones — Grupo Oliveira</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f4f7;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .header {
+    background: #3A5068;
+    color: white;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-back {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    font-size: 22px;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .header-title { font-size: 16px; font-weight: 700; }
+  .header-sub { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+
+  /* Content */
+  .normas-page { padding: 0; background: #f0f4f7; flex: 1; overflow-y: auto; min-height: 0; }
+  .normas-block { margin: 14px 16px 0; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .normas-block-header {
+    background: #3A5068; color: white;
+    padding: 12px 16px;
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .normas-block-body { padding: 14px 16px; }
+  .normas-item {
+    display: flex; gap: 10px;
+    font-size: 13px; color: #444; line-height: 1.55;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f4f7;
+  }
+  .normas-item:last-child { border-bottom: none; }
+  .normas-num { color: #7bbfcc; font-weight: 700; flex-shrink: 0; width: 18px; }
+  .normas-text-block { font-size: 13px; color: #444; line-height: 1.6; padding: 4px 0; }
+  .normas-highlight {
+    background: #EEF0FA; border-left: 3px solid #3A5068;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px; margin: 8px 0;
+    font-size: 12px; color: #3A5068; line-height: 1.55;
+  }
+  .address-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #EEF0FA; color: #3A5068;
+    border-radius: 20px; padding: 5px 12px;
+    font-size: 12px; font-weight: 600;
+    margin: 12px 16px 0;
+  }
+  .wifi-card {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .wifi-pill {
+    flex: 1; min-width: 130px;
+    background: #f0f4f7; border-radius: 10px;
+    padding: 8px 12px;
+  }
+  .wifi-pill-label { font-size: 10.5px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+  .wifi-pill-value { font-size: 14px; color: #3A5068; font-weight: 700; margin-top: 2px; font-family: 'SFMono-Regular', Consolas, monospace; }
+
+  .legal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px 14px;
+    background: #f0f4f7;
+    flex-shrink: 0;
+    border-top: 1px solid #d8e4ec;
+  }
+  .legal-links { display: flex; gap: 6px; align-items: center; }
+  .legal-links a { font-size: 10.5px; color: #7a9ab0; text-decoration: none; letter-spacing: 0.01em; }
+  .legal-links a:hover { color: #3A5068; }
+  .legal-links-sep { font-size: 9px; color: #b0c4d0; }
+  .legal-brand { font-size: 9px; color: #b0c4d0; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <a class="header-back" onclick="history.back()">‹</a>
+    <div>
+      <div class="header-title">Instrucciones</div>
+      <div class="header-sub">Grupo Oliveira · Apartamentos Génova</div>
+    </div>
+  </div>
+
+  <div class="normas-page">
+
+    <div class="address-tag">📍 C/ Amadeo Arias, 24 (Parquesol, Valladolid)</div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">📞 Contacto y atención</div>
+      <div class="normas-block-body">
+        <div class="normas-item"><span class="normas-num">☎</span><span>Llamada o WhatsApp: <strong>613 61 19 78</strong></span></div>
+        <div class="normas-item"><span class="normas-num">✉</span><span>Email: <strong>apartamentosgenova@gmail.com</strong></span></div>
+        <div class="normas-highlight">🚨 <strong>Urgencias 24 horas:</strong> 983 40 99 16 · 983 79 12 43</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">💻 Check-in online</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">Antes de la entrada deberá realizar el check-in de forma online. Para ello necesitaremos su email o un número de teléfono con WhatsApp, unos días antes de la llegada.</div>
+        <div class="normas-text-block">Todos los huéspedes alojados deberán rellenar sus datos y firmar la recepción de las normas del apartamento.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🏠 Su estancia</div>
+      <div class="normas-block-body">
+        <div class="normas-item"><span class="normas-num">🔑</span><span><strong>Check-in:</strong> a partir de las 15:00 h.</span></div>
+        <div class="normas-item"><span class="normas-num">🚪</span><span><strong>Check-out:</strong> antes de las 11:00 h.</span></div>
+        <div class="normas-highlight">📲 El mismo día de llegada recibirá los códigos de acceso al portal y al apartamento por WhatsApp.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🚗 Llegar en coche</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">Diríjase a la calle Manuel Silvela. Aparque si hay plazas libres, o déjelo en línea amarilla con las luces de posición a la altura del nº2, frente a la Confitería Marovalles.</div>
+        <div class="normas-text-block">Acceda andando a la calle Amadeo Arias, 24 (es peatonal) para recoger la llave. Acceda al edificio y a su apartamento con el código que le hemos proporcionado; encontrará las llaves sobre la mesa del salón.</div>
+        <div class="normas-text-block">A continuación, vuelva a por su coche y diríjase a Calle Ciudad de la Habana, Nº3 (al lado contrario de la calle peatonal).</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🅿️ Acceder al garaje</div>
+      <div class="normas-block-body">
+        <div class="normas-item"><span class="normas-num">1</span><span>Abra el portón con el mando o la llave negra.</span></div>
+        <div class="normas-item"><span class="normas-num">2</span><span>Las plazas de garaje están en el sótano 3. Están indicadas: siga las flechas.</span></div>
+        <div class="normas-highlight">⚠️ Conduzca con cuidado, las bajadas son un poco cerradas.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🔼 Del garaje al apartamento</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">Una vez estacionado el coche en su plaza, busque la puerta de subida a planta, indicada con un cartel de Apartamentos Génova. Por favor, utilice el ascensor.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🔽 Del garaje a la calle</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">En el sótano 1 encontrará la salida. Introduzca la llave negra en el pilar a su izquierda para abrir el portón.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🚌 Transporte</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">Si desea ir al centro en bus, coja la línea 8, cuya parada está a pocos metros del apartamento. Frecuencia: cada 15 minutos.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🛍️ Alrededores</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">El barrio de Parquesol cuenta con todos los servicios: supermercados, bares y restaurantes, farmacias, centro de salud, zonas de comercio y de recreo, entre otros.</div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🛜 WiFi</div>
+      <div class="normas-block-body">
+        <div class="normas-text-block">El apartamento cuenta con WiFi de alta velocidad.</div>
+        <div class="wifi-card">
+          <div class="wifi-pill">
+            <div class="wifi-pill-label">Red</div>
+            <div class="wifi-pill-value">Genova</div>
+          </div>
+          <div class="wifi-pill">
+            <div class="wifi-pill-label">Contraseña</div>
+            <div class="wifi-pill-value">Amadeo24</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="normas-block">
+      <div class="normas-block-header">🔑 El día de salida</div>
+      <div class="normas-block-body">
+        <div class="normas-item"><span class="normas-num">•</span><span>Recuerde dejar las llaves del garaje. Puede utilizar el buzón verde que encontrará junto al portón de salida, o bien dejarlas en la mesa del salón, junto con las llaves del apartamento.</span></div>
+        <div class="normas-item"><span class="normas-num">•</span><span>No deje platos ni menaje sucios.</span></div>
+        <div class="normas-item"><span class="normas-num">•</span><span>Tire la basura, deje el cubo y la nevera vacía.</span></div>
+        <div class="normas-item"><span class="normas-num">•</span><span>Deje las toallas en la bañera.</span></div>
+        <div class="normas-highlight">⚠️ En caso de incumplimiento se aplicará una sanción de 50 € por suplemento de limpieza. La pérdida de llaves de garaje tiene una penalización de 30 €.</div>
+      </div>
+    </div>
+
+    <div class="normas-block" style="background:#3A5068;">
+      <div class="normas-block-body" style="text-align:center; padding:20px 18px;">
+        <div style="font-size:20px; margin-bottom:6px;">💙</div>
+        <div style="font-size:13.5px; color:#ffffff; line-height:1.6; font-weight:600;">¡Le deseamos una excelente estancia en Apartamentos Génova!</div>
+        <div style="font-size:12px; color:#cdd8e2; line-height:1.6; margin-top:4px;">Cualquier duda, no dude en contactarnos.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pie legal -->
+  <div class="legal-footer">
+    <div class="legal-links">
+      <a href="https://apartamentosgo.com/politica-de-privacidad/" target="_blank">Política de privacidad</a>
+      <span class="legal-links-sep">·</span>
+      <a href="https://apartamentosgo.com/aviso-legal/" target="_blank">Aviso legal</a>
+    </div>
+    <div class="legal-brand">Diseñado por StandQR</div>
+  </div>
+
+</body>
+</html>
