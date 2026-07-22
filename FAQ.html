@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Preguntas frecuentes — Grupo Oliveira</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f4f7;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .header {
+    background: #3A5068;
+    color: white;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header-back {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    font-size: 22px;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .header-title { font-size: 16px; font-weight: 700; }
+  .header-sub { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+
+  /* Content */
+  .faq-page { padding: 0 0 16px; background: #f0f4f7; flex: 1; overflow-y: auto; min-height: 0; }
+  .faq-section-label {
+    margin: 16px 16px 8px;
+    font-size: 11px; font-weight: 700; color: #7a9ab0;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .faq-item {
+    margin: 8px 16px 0;
+    background: white;
+    border: 1px solid #d0dde6;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #2a2a2a;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-q-icon {
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    background: #EEF0FA; color: #3A5068;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .faq-chevron {
+    margin-left: auto;
+    color: #ccc;
+    font-size: 13px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-item[open] summary { border-bottom: 1px solid #f0f4f7; }
+  .faq-answer {
+    padding: 4px 14px 14px 52px;
+    font-size: 13px; color: #555; line-height: 1.6;
+  }
+  .faq-answer strong { color: #3A5068; }
+
+  .legal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px 14px;
+    background: #f0f4f7;
+    flex-shrink: 0;
+    border-top: 1px solid #d8e4ec;
+  }
+  .legal-links { display: flex; gap: 6px; align-items: center; }
+  .legal-links a { font-size: 10.5px; color: #7a9ab0; text-decoration: none; letter-spacing: 0.01em; }
+  .legal-links a:hover { color: #3A5068; }
+  .legal-links-sep { font-size: 9px; color: #b0c4d0; }
+  .legal-brand { font-size: 9px; color: #b0c4d0; letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <a class="header-back" onclick="history.back()">‹</a>
+    <div>
+      <div class="header-title">Preguntas frecuentes</div>
+      <div class="header-sub">Grupo Oliveira · Resolvemos tus dudas</div>
+    </div>
+  </div>
+
+  <div class="faq-page">
+
+    <div class="faq-section-label">Horarios y llegada</div>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿A qué hora es el check-in y el check-out?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">El <strong>check-in</strong> es a partir de las <strong>15:00 h</strong> y el <strong>check-out</strong> antes de las <strong>11:00 h</strong>. Recibirá los códigos de acceso el mismo día de su llegada.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Necesito hacer algo antes de llegar?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Sí, todos los huéspedes deben completar el <strong>check-in online</strong> antes de acceder al alojamiento, conforme a la normativa vigente, rellenando sus datos y firmando la recepción de las normas.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puede alojarse alguien que no esté en la reserva?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">No. Únicamente pueden alojarse las personas incluidas en la reserva confirmada, y en ningún caso se puede exceder el número máximo de ocupantes autorizado.</div>
+    </details>
+
+    <div class="faq-section-label">Convivencia y ruido</div>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puedo hacer una fiesta o reunión en el apartamento?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">No, las fiestas, celebraciones o reuniones que puedan molestar a los vecinos están <strong>estrictamente prohibidas</strong>.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Hay horario de silencio?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Sí, el horario de silencio es de <strong>22:00 a 08:00 h</strong>. Se ruega respetar el descanso de los vecinos en todo momento.</div>
+    </details>
+
+    <div class="faq-section-label">Limpieza y salida</div>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Con qué frecuencia se limpia el apartamento?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">En estancias de media y larga duración, la limpieza está incluida cada 4 días y es obligatoria cada 7 días. Si no desea que se realice antes de los 7 días, debe comunicarlo; de lo contrario, el personal entrará entre las 10:00 y las 12:00 h. Incluye cambio de toallas y sábanas y limpieza general (excepto menaje de cocina).</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Qué debo hacer el día de salida?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Deje las toallas en la bañera o plato de ducha, el menaje limpio en el lavavajillas o escurridor, la nevera sin restos de comida, y saque la basura a los contenedores exteriores. La suciedad o daños extraordinarios pueden dar lugar a cargos adicionales.</div>
+    </details>
+
+    <div class="faq-section-label">Instalaciones y seguridad</div>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puedo mover los muebles o sacarlos al exterior?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">No está permitido mover muebles ni trasladar el mobiliario al exterior, ni manipular cuadros eléctricos, calderas o equipos técnicos.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Qué hago si hay una avería en el apartamento?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Cualquier avería o desperfecto debe comunicarse <strong>de inmediato</strong> al anfitrión a través de los canales de contacto habituales.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puede entrar alguien al apartamento durante mi estancia?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Su privacidad es una prioridad absoluta: el propietario o el personal de gestión nunca entrarán sin su consentimiento previo. La única excepción es un caso de <strong>fuerza mayor o emergencia grave</strong> (por ejemplo, indicios de incendio, humo, olor a gas o fuga de agua activa), en cuyo caso se intentará contactar con usted antes de acceder.</div>
+    </details>
+
+    <div class="faq-section-label">Prohibiciones y sanciones</div>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puedo fumar o vapear dentro del apartamento?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">No, está prohibido fumar o vapear en el interior del alojamiento. Hacerlo conlleva una penalización de hasta <strong>150 €</strong> por limpieza y desinfección.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puedo traer a mi mascota?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Solo se admiten mascotas si han sido <strong>previamente autorizadas</strong> por el alojamiento. El propietario será responsable de cualquier daño o molestia que ocasionen.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Puedo entrar bicicletas o patinetes eléctricos?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">No, no está permitido introducir bicicletas, patinetes eléctricos, monopatines u otros vehículos similares en el apartamento ni en las zonas comunes.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Qué pasa si incumplo alguna norma?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">El incumplimiento puede dar lugar a la finalización inmediata de la estancia, sin reembolso, y a la reclamación de daños. Además se aplican penalizaciones económicas: hasta <strong>150 €</strong> por fumar, hasta <strong>50 €</strong> por limpieza extra y hasta <strong>300 €</strong> por causar molestias a los vecinos o motivar avisos a la policía.</div>
+    </details>
+
+    <div class="faq-section-label">Servicios incluidos</div>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿El WiFi está incluido?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">Sí, el WiFi está incluido en todos los apartamentos. Puede consultar la red y contraseña en el apartado "Instrucciones" o "WiFi del apartamento" de esta página.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q-icon">?</span><span>¿Qué incluye la cocina y la limpieza inicial?</span><span class="faq-chevron">▾</span></summary>
+      <div class="faq-answer">El apartamento incluye ropa de cama y toallas, cocina totalmente equipada, conjunto de limpieza y consumibles básicos (gel, champú, jabón, papel higiénico), además de plancha, lavadora y secador de pelo.</div>
+    </details>
+
+  </div>
+
+  <!-- Pie legal -->
+  <div class="legal-footer">
+    <div class="legal-links">
+      <a href="https://apartamentosgo.com/politica-de-privacidad/" target="_blank">Política de privacidad</a>
+      <span class="legal-links-sep">·</span>
+      <a href="https://apartamentosgo.com/aviso-legal/" target="_blank">Aviso legal</a>
+    </div>
+    <div class="legal-brand">Diseñado por StandQR</div>
+  </div>
+
+</body>
+</html>
