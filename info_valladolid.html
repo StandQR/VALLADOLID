@@ -75,36 +75,6 @@
   .legal-links-sep { font-size: 9px; color: #b0c4d0; }
   .legal-brand { font-size: 9px; color: #b0c4d0; letter-spacing: 0.04em; }
 
-  /* ── TABS ── */
-  .tabs {
-    display: flex;
-    border-top: 1px solid rgba(255,255,255,0.12);
-  }
-  .tab-btn {
-    flex: 1;
-    background: none;
-    border: none;
-    color: rgba(234,244,248,0.6);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 0 8px;
-    cursor: pointer;
-    position: relative;
-    letter-spacing: 0.02em;
-    transition: color 0.2s;
-  }
-  .tab-btn.active {
-    color: #EAF4F8;
-  }
-  .tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 16px; right: 16px;
-    height: 2px;
-    background: #7bbfcc;
-    border-radius: 2px 2px 0 0;
-  }
-
   /* ── ACCORDION ── */
   .accordion { margin: 0 16px 0; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
   .accordion-header {
@@ -174,30 +144,6 @@
   .subsection { padding: 8px 14px 4px; background: #fafcfe; border-bottom: 1px solid #eef2f5; }
   .subsection-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 
-  .tab-btn {
-    flex: 1;
-    background: none;
-    border: none;
-    color: rgba(234,244,248,0.6);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 0 8px;
-    cursor: pointer;
-    position: relative;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    text-align: center;
-    transition: color 0.2s;
-  }
-  .tab-btn.active { color: #EAF4F8; }
-  .tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 16px; right: 16px;
-    height: 2px;
-    background: #7bbfcc;
-    border-radius: 2px 2px 0 0;
-  }
 </style>
 </head>
 <body>
@@ -210,10 +156,6 @@
         <div class="header-title">Información de interés</div>
         <div class="header-sub">Valladolid</div>
       </div>
-    </div>
-    <div class="tabs">
-      <a class="tab-btn active" href="info_valladolid.html">🗺️ Turismo</a>
-      <a id="tab-servicios" class="tab-btn" href="ZONAS/parquesol.html">🛎️ Servicios</a>
     </div>
   </div>
 
@@ -587,32 +529,6 @@ function toggleAcc(header) {
   }
 }
 
-// 2. Detectar automáticamente de qué edificio viene el usuario
-window.addEventListener('DOMContentLoaded', () => {
-  const paginaAnterior = document.referrer.toUpperCase();
-  const tabServicios = document.getElementById('tab-servicios');
-
-  if (tabServicios) {
-    const mapeoZonas = {
-      'CIRCULAR':  'ZONAS/circular.html',
-      'COVARESA':  'ZONAS/covaresa.html',
-      'FELIPE_II': 'ZONAS/centro.html',
-      'GENOVA':    'ZONAS/parquesol.html',
-      'LEOPOLDO':  'ZONAS/centro.html'
-    };
-
-    let enlaceFinal = 'ZONAS/parquesol.html';
-
-    for (const [edificio, archivoZona] of Object.entries(mapeoZonas)) {
-      if (paginaAnterior.includes(edificio)) {
-        enlaceFinal = archivoZona;
-        break;
-      }
-    }
-
-    tabServicios.href = enlaceFinal;
-  }
-});
 </script>
 </body>
 </html>
